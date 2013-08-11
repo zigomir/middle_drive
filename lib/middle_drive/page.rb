@@ -2,12 +2,14 @@ module MiddleDrive
   class Page
 
     def initialize(site)
-      pages_document_title = MiddleDrive::Config.get('site.pages')
       @languages = MiddleDrive::Config.get('site.languages')
-      @pages_document = site.spreadsheets.select { |s| s.title == pages_document_title }.first
+      @pages_document = site.spreadsheets.select { |s| s.title == 'pages' }.first
     end
 
     def build(path)
+      locales_path = "#{path}/locales"
+      Dir.mkdir(locales_path) unless File.exists?(locales_path)
+
       # each tab is a page
       pages = {'pages' => {}}
 
@@ -30,10 +32,10 @@ module MiddleDrive
       @languages.each do |lang|
         output = {}
         output[lang] = lang_keys[lang]
-        File.write("#{path}/locales/#{lang}.yml", output.to_yaml)
+        File.write("#{locales_path}/#{lang}.yml", output.to_yaml)
       end
 
-      File.write(path + '/pages.yml', pages.to_yaml)
+      File.write("#{path}/pages.yml", pages.to_yaml)
     end
 
     def load_language_values(hash, sheet, lang)

@@ -4,8 +4,6 @@ gdrive:
 
 site:
   collection: middleman
-  images_collection: images
-  pages: pages
   languages: # order matters here!
     - en
     - sl
@@ -13,4 +11,3 @@ site:
 
 middleman:
   build_path: .
-  images_path: source/images

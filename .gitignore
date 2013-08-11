@@ -20,4 +20,5 @@ tmp
 middle_drive.yml
 build/source/images/*
 build/locales/*
+build/data/*
 build/pages.yml
