@@ -12,4 +12,4 @@
 
 Look at settings.SAMPLE.yml
 
-`sitemap` should be a spreadsheet.
+`pages` must be a spreadsheet which contains pages, separated into worksheets (tabs).

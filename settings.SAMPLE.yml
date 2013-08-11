@@ -6,6 +6,9 @@ site:
   collection: middleman
   images_collection: images
   pages: pages
+  languages: # order matters here!
+    - en
+    - sl
 
 middleman:
   build_path: build

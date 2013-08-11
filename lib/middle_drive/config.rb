@@ -15,5 +15,9 @@ module MiddleDrive
       values
     end
 
+    def self.max_languages
+      5
+    end
+
   end
 end
