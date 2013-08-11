@@ -34,7 +34,22 @@ Then run
 ![Example](/img/spreadsheet.png)
 - create google spreadsheet named `data` inside `site.collection`
   - each tab in this spreadsheet represents different list
-  - values are only in first column
+  - first data cell represents data type, which can be any of `array`, `hash` and `list`
+- to display image just use this Middleman helper
+
+```erb
+<%= image_tag data.article.article.image %>
+```
+
+- to display list type use this
+
+```erb
+<% data.blog.blog.each do |blog_post| %>
+  <h2><%= blog_post.title %></h2>
+  <%= blog_post.content %>
+  <span><%= blog_post.date %></span>
+<% end %>
+```
 
 ## Usage
 
@@ -44,8 +59,6 @@ This command will sync images and page information from your Google Drive collec
 `middle_drive.yml` file.
 
 ## TODO
-- http://middlemanapp.com/advanced/local-data/
-- connect images with local data somehow
 - http://tvaughan.github.io/middleman-deploy/
 	- separate project for triggering sync between a site and drive
 - [Partials](http://middlemanapp.com/templates/) for debug info
