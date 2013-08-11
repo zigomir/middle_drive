@@ -12,5 +12,5 @@ site:
   default_language: en
 
 middleman:
-  build_path: build
+  build_path: .
   images_path: source/images
