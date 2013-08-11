@@ -1,0 +1,11 @@
+gdrive:
+  username: user@example.com
+  password: password
+
+site:
+  collection: middleman
+  images_collection: images
+  pages: pages
+
+middleman:
+  build_path: build
