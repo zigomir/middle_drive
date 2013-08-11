@@ -16,8 +16,8 @@ test/tmp
 test/version_tmp
 tmp
 
-
+.idea
 settings.yml
-build/images/*
+build/source/images/*
 build/locales/*
 build/pages.yml

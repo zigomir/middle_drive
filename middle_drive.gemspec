@@ -4,12 +4,12 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'middle_drive/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "middle_drive"
+  spec.name          = 'middle_drive'
   spec.version       = MiddleDrive::VERSION
-  spec.authors       = ["TODO: Write your name"]
-  spec.email         = ["TODO: Write your email address"]
-  spec.description   = %q{TODO: Write a gem description}
-  spec.summary       = %q{TODO: Write a gem summary}
+  spec.authors       = ['Ziga Vidic']
+  spec.email         = ['zigomir@gmail.com']
+  spec.description   = %q{Integrate Middleman and Google Drive}
+  spec.summary       = %q{Will sync Google Drive spreadsheets and images with Middleman to use it as CMS.}
   spec.homepage      = ''
   spec.license       = 'MIT'
 

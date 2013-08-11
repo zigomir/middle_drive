@@ -12,3 +12,4 @@ site:
 
 middleman:
   build_path: build
+  images_path: source/images
