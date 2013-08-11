@@ -3,7 +3,7 @@ require 'yaml'
 module MiddleDrive
   module Config
 
-    @settings = YAML.load(File.open('settings.yml'))
+    @settings = YAML.load(File.open('middle_drive.yml'))
 
     # 'gdrive.username' => @settings['gdrive']['username']
     def self.get(key)

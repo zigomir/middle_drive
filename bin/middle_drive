@@ -1,4 +1,18 @@
 #!/usr/bin/env ruby
-require 'middle_drive'
 
-MiddleDrive.run
+if ARGV.length == 0
+  require 'middle_drive'
+  MiddleDrive.run
+elsif ARGV[0] == 'init'
+  current_user_dir = Dir.pwd
+  gem_dir = "#{File.dirname(__FILE__)}/.."
+
+  cmd_middle_drive_settings = "cp #{gem_dir}/middle_drive.SAMPLE.yml #{current_user_dir}/middle_drive.yml"
+  cmd_middleman_config = "cp #{gem_dir}/config.MIDDLEMAN.rb #{current_user_dir}/config.rb"
+
+  p 'Writing middle_drive.yml'
+  system(cmd_middle_drive_settings)
+
+  p 'Writing config.rb for'
+  system(cmd_middleman_config)
+end

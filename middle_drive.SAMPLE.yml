@@ -9,6 +9,7 @@ site:
   languages: # order matters here!
     - en
     - sl
+  default_language: en
 
 middleman:
   build_path: build

@@ -17,7 +17,7 @@ test/version_tmp
 tmp
 
 .idea
-settings.yml
+middle_drive.yml
 build/source/images/*
 build/locales/*
 build/pages.yml

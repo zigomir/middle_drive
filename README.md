@@ -2,19 +2,13 @@
 
 ## Setup
 
-    cp settings.SAMPLE.yml settings.yml
+    middle_drive init
 
 ## Usage
 
-    bundle console
-
-Temporary: copy assets to middleman app
-
-    cp -r ../development/middle_drive/build/* .
+  middle_drive
 
 ## Conventions
-
-Look at settings.SAMPLE.yml
 
 `pages` must be a spreadsheet which contains pages, separated into worksheets (tabs).
 

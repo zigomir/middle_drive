@@ -1,12 +1,40 @@
 require 'yaml'
 
 PAGES = YAML.load(File.open('pages.yml'))
+MIDDLE_DRIVE_CONFIG = YAML.load(File.open('middle_drive.yml'))
 
+LANGS = MIDDLE_DRIVE_CONFIG['site']['languages']
+DEFAULT_LANGUAGE = MIDDLE_DRIVE_CONFIG['site']['default_language']
+
+###
+# Dynamic pages
+###
 PAGES['pages'].each do |page|
   page_name = page[0]
   template_name = page[1]
 
-  proxy "#{page_name}", "#{template_name}-template.html", :locals => { :page_name => page_name }
+  # for each page create default language without locale in url
+  proxy page_name,
+        "#{template_name}-template.html",
+        :locals => { :page_name => page_name, :locale => DEFAULT_LANGUAGE },
+        :ignore => true
+
+  LANGS.each do |locale|
+    proxy "#{locale}/#{page_name}",
+          "#{template_name}-template.html",
+          :locals => { :page_name => page_name, :locale => locale },
+          :ignore => true
+  end
+end
+
+###
+# Helpers
+###
+# Methods defined in the helpers block are available in templates
+helpers do
+  def trans(page_name, key, locale)
+    I18n.t("#{page_name}.#{key}", locale: locale)
+  end
 end
 
 ###
@@ -35,11 +63,6 @@ end
 #   page "/admin/*"
 # end
 
-
-###
-# Helpers
-###
-
 # Automatic image dimensions on image_tag helper
 # activate :automatic_image_sizes
 
@@ -49,13 +72,6 @@ activate :livereload
 # http://middlemanapp.com/advanced/localization/
 # set path so all templates can use t helper, otherwise only templates in localizable directory would work
 activate :i18n, :path => ''
-
-# Methods defined in the helpers block are available in templates
-helpers do
-  def trans(page_name, key)
-    I18n.t("#{page_name}.#{key}")
-  end
-end
 
 set :css_dir, 'stylesheets'
 set :js_dir, 'javascripts'
