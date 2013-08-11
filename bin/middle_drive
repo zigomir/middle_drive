@@ -7,12 +7,27 @@ elsif ARGV[0] == 'init'
   current_user_dir = Dir.pwd
   gem_dir = "#{File.dirname(__FILE__)}/.."
 
-  cmd_middle_drive_settings = "cp #{gem_dir}/middle_drive.SAMPLE.yml #{current_user_dir}/middle_drive.yml"
-  cmd_middleman_config = "cp #{gem_dir}/config.MIDDLEMAN.rb #{current_user_dir}/config.rb"
+  middle_drive_yml = "#{current_user_dir}/middle_drive.yml"
+  middleman_config = "#{current_user_dir}/config.rb"
 
-  p 'Writing middle_drive.yml'
-  system(cmd_middle_drive_settings)
+  cmd_middle_drive_settings = "cp #{gem_dir}/middle_drive.SAMPLE.yml #{middle_drive_yml}"
+  cmd_middleman_config = "cp #{gem_dir}/config.MIDDLEMAN.rb #{middleman_config}"
 
-  p 'Writing config.rb for'
-  system(cmd_middleman_config)
+  unless File.exist?(middle_drive_yml)
+    p 'Writing middle_drive.yml'
+    system(cmd_middle_drive_settings)
+  end
+
+  unless File.exist?(middle_drive_yml)
+    p 'Writing config.rb for'
+    system(cmd_middleman_config)
+  end
+
+  gitignore       = "#{current_user_dir}/.gitignore"
+  already_ignored = File.open(gitignore).each_line.any? { |line| line.chomp == 'middle_drive.yml'}
+
+  unless already_ignored
+    p 'Putting middle_drive.yml to your .gitignore'
+    system("echo middle_drive.yml >> #{current_user_dir}/.gitignore")
+  end
 end

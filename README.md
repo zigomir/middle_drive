@@ -21,19 +21,24 @@ Then run
 
 ## Setup
 
+### Middleman setup
+
     middle_drive init
+
+### Google drive setup conventions
+
+- create a new collection in your google drive. Name it the same like in `middle_drive.yml`'s `site.collection` value.
+- create google spreadsheet named `pages` inside this collection. You can name it differently if you specify it for `site.pages`
+  - each tab in this spreadsheet represents a page
+  - value in first row and first column represents a template which will be used by middleman
+![Example](/img/spreadsheet.png)
 
 ## Usage
 
     middle_drive
 
-## Conventions
-
-`pages` must be a spreadsheet which contains pages, separated into worksheets (tabs).
-
-### Middleman config for dynamic pages
-
-Copy `config.MIDDLEMAN.rb` to `config.rb` to your Middleman app.
+This command will sync images and page information from your Google Drive collection which was set in
+`middle_drive.yml` file.
 
 ## TODO
 - http://middlemanapp.com/advanced/local-data/
