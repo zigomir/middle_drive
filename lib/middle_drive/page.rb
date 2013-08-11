@@ -9,7 +9,7 @@ module MiddleDrive
 
     def build(path)
       # each tab is a page
-      pages = {'pages' => []}
+      pages = {'pages' => {}}
 
       # init lang hash
       lang_keys = {}
@@ -19,7 +19,8 @@ module MiddleDrive
 
       @pages_document.worksheets.each do |page|
         puts "Building key value pairs for page named #{page.title}"
-        pages['pages'] << page.title
+        # in very first row we specify page's template
+        pages['pages'][page.title] = page[1, 1]
 
         @languages.each do |lang|
           lang_keys = load_language_values(lang_keys, page, lang)
@@ -37,11 +38,12 @@ module MiddleDrive
 
     def load_language_values(hash, sheet, lang)
       column_index = get_language_column_index(sheet, lang)
+      hash[lang][sheet.title] = {}
 
       (2..sheet.num_rows).each do |row|
-        key   = sheet.title + '.' + sheet[row, 1]
+        key   = sheet[row, 1]
         value = sheet[row, column_index]
-        hash[lang][key] = value
+        hash[lang][sheet.title][key] = value
       end
 
       hash
