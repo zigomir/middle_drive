@@ -58,9 +58,16 @@ Then run
 This command will sync images and page information from your Google Drive collection which was set in
 `middle_drive.yml` file.
 
+
+    middle_drive update
+
+Will search for update spreadsheet inside collection. If first A1 column will include `please update` value it will
+sync all other data and clear up update flag. This is useful for circular checking if there are new updates to be
+fetched.
+
 ## TODO
-- http://tvaughan.github.io/middleman-deploy/
-	- separate project for triggering sync between a site and drive
+- http://tvaughan.github.io/middleman-deploy/ + https://github.com/javan/whenever to run middle_drive update
 - [Partials](http://middlemanapp.com/templates/) for debug info
 - when building from scratch it would be better to start building `pages.yml`, `data.yml`, `en.yml` files locally and
 then run init to build structure on google drive
+- https://support.google.com/drive/answer/63175

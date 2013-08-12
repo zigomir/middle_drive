@@ -3,6 +3,9 @@
 if ARGV.length == 0
   require 'middle_drive'
   MiddleDrive.run
+elsif ARGV[0] == 'update'
+  require 'middle_drive'
+  MiddleDrive.update
 elsif ARGV[0] == 'init'
   current_user_dir = Dir.pwd
   gem_dir = "#{File.dirname(__FILE__)}/.."
