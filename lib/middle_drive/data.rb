@@ -1,18 +1,18 @@
 module MiddleDrive
   class Data
 
-    def initialize(site)
-      @data_document = site.spreadsheets.select { |s| s.title == 'data' }.first
+    def initialize(site, lang)
+      @data_document = site.spreadsheets.select { |s| s.title == "data_#{lang}" }.first
     end
 
-    def build(path)
+    def build(path, lang)
       data_path = "#{path}/data"
       Dir.mkdir(data_path) unless File.exists?(data_path)
 
       @data_document.worksheets.each do |sheet|
-        save_to = "#{data_path}/#{sheet.title}.yml"
+        save_to = "#{data_path}/#{sheet.title}_#{lang}.yml"
         data = {}
-        puts "Building list named #{sheet.title}"
+        puts "Saving data for #{sheet.title}_#{lang}"
 
         data_type = sheet[1, 1]
 

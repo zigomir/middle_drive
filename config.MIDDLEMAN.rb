@@ -10,19 +10,21 @@ DEFAULT_LANGUAGE = MIDDLE_DRIVE_CONFIG['site']['default_language']
 # Dynamic pages
 ###
 PAGES['pages'].each do |page|
-  page_name = page[0]
-  template_name = page[1]
+  locale = page[0]
+  pages  = page[1]
 
-  # for each page create default language without locale in url
-  proxy page_name,
-        "#{template_name}-template.html",
-        :locals => { :page_name => page_name, :locale => DEFAULT_LANGUAGE },
-        :ignore => true
+  pages.keys.each do |key|
+    page_name     = key
+    template_name = pages[key]
 
-  LANGS.each do |locale|
-    proxy "#{locale}/#{page_name}",
-          "#{template_name}-template.html",
+    path = page_name == 'index' ? locale : "#{locale}/#{page_name}"
+    proxy path, "#{template_name}-template.html",
           :locals => { :page_name => page_name, :locale => locale },
+          :ignore => true
+
+    # for each page create default language without locale in url
+    proxy page_name, "#{template_name}-template.html",
+          :locals => { :page_name => page_name, :locale => DEFAULT_LANGUAGE },
           :ignore => true
   end
 end

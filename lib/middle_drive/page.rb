@@ -3,7 +3,9 @@ module MiddleDrive
 
     def initialize(site)
       @languages = MiddleDrive::Config.get('site.languages')
-      @pages_document = site.spreadsheets.select { |s| s.title == 'pages' }.first
+
+      # TODO refactor this class to Translations
+      @pages_document = site.spreadsheets.select { |s| s.title == 'TODO-translations' }.first
     end
 
     def build(path)

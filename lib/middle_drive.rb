@@ -25,14 +25,17 @@ module MiddleDrive
   def self.run
     MiddleDrive.init
 
-    i = Image.new(@site)
-    i.download(@build_path)
+    #i = Image.new(@site)
+    #i.download(@build_path)
+    #
+    #p = Page.new(@site)
+    #p.build(@build_path)
 
-    p = Page.new(@site)
-    p.build(@build_path)
-
-    d = Data.new(@site)
-    d.build(@build_path)
+    languages = MiddleDrive::Config.get('site.languages')
+    languages.each do |lang|
+      d = Data.new(@site, lang)
+      d.build(@build_path, lang)
+    end
   end
 
   def self.update
