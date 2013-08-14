@@ -38,17 +38,24 @@ Then run
 - to display image just use this Middleman helper
 - use protected ranges to prevent customer changing the structure of pages: https://support.google.com/drive/answer/63175
 
+
+## Quick helpers
+
 ```erb
-<%= image_tag data.article.article.image %>
+<section class="article">
+  <h3><%= d(locals).title %></h3>
+  <%= d(locals).content %>
+  <%= image_tag d(locals).image %>
+</section>
 ```
 
 - to display list type use this
 
 ```erb
-<% data.blog.blog.each do |blog_post| %>
-  <h2><%= blog_post.title %></h2>
-  <%= blog_post.content %>
-  <span><%= blog_post.date %></span>
+<% d(locals).each do |post| %>
+  <h2><%= post.title %></h2>
+  <%= post.content %>
+  <span><%= post.date %></span>
 <% end %>
 ```
 
@@ -67,7 +74,9 @@ sync all other data and clear up update flag. This is useful for circular checki
 fetched.
 
 ## TODO
-- http://tvaughan.github.io/middleman-deploy/ + https://github.com/javan/whenever to run middle_drive update
+- modularize config.rb
+- tests!
 - [Partials](http://middlemanapp.com/templates/) for debug info
-- when building from scratch it would be better to start building `pages.yml`, `data.yml`, `en.yml` files locally and
-then run init to build structure on google drive
+- when building from scratch it would be better to start building `pages.yml`, `data.yml`, `en.yml` files locally
+and then run init to build structure on google drive
+- http://tvaughan.github.io/middleman-deploy/ + https://github.com/javan/whenever to run middle_drive update
