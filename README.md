@@ -36,6 +36,7 @@ Then run
   - each tab in this spreadsheet represents different list
   - first data cell represents data type, which can be any of `array`, `hash` and `list`
 - to display image just use this Middleman helper
+- use protected ranges to prevent customer changing the structure of pages: https://support.google.com/drive/answer/63175
 
 ```erb
 <%= image_tag data.article.article.image %>
@@ -70,4 +71,3 @@ fetched.
 - [Partials](http://middlemanapp.com/templates/) for debug info
 - when building from scratch it would be better to start building `pages.yml`, `data.yml`, `en.yml` files locally and
 then run init to build structure on google drive
-- https://support.google.com/drive/answer/63175

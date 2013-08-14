@@ -37,6 +37,14 @@ helpers do
   def trans(page_name, key, locale)
     I18n.t("#{page_name}.#{key}", locale: locale)
   end
+
+  # get data from local variables
+  def d(locals)
+    page_name     = locals[:page_name]
+    locale        = locals[:locale]
+    template_name = locals[:template_name]
+    data.send("#{page_name}_#{locale}").send("#{template_name}")
+  end
 end
 
 ###
