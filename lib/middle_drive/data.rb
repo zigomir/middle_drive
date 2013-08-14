@@ -14,32 +14,32 @@ module MiddleDrive
         data = {}
         puts "Saving data for #{sheet.title}_#{lang}"
 
-        data_type = sheet[1, 1]
+        template_name, data_type = sheet[1, 1].split(':')
 
         if data_type == 'array' or data_type == 'hash'
-          data[sheet.title] = [] if data_type == 'array'
-          data[sheet.title] = {} if data_type == 'hash'
+          data[template_name] = [] if data_type == 'array'
+          data[template_name] = {} if data_type == 'hash'
 
           (2..sheet.num_rows).each do |row|
-            data[sheet.title] << sheet[row, 1] if data_type == 'array' # only one column
-            data[sheet.title][sheet[row, 1]] = sheet[row, 2] if data_type == 'hash'
+            data[template_name] << sheet[row, 1] if data_type == 'array' # only one column
+            data[template_name][sheet[row, 1]] = sheet[row, 2] if data_type == 'hash'
           end
         elsif data_type == 'list'
-          data = build_list(sheet)
+          data = build_list(sheet, template_name)
         end
 
         File.write(save_to, data.to_yaml)
       end
     end
 
-    def build_list(sheet)
-      data = { sheet.title => [] }
+    def build_list(sheet, template_name)
+      data = { template_name => [] }
       (2..sheet.num_rows).each do |row|
         list_object = {}
         (2..sheet.num_cols).each do |col|
           list_object[sheet[1, col]] = sheet[row, col]
         end
-        data[sheet.title] << list_object
+        data[template_name] << list_object
       end
       data
     end

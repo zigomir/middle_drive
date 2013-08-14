@@ -1,19 +1,14 @@
 module MiddleDrive
-  class Page
+  class Translation
 
     def initialize(site)
       @languages = MiddleDrive::Config.get('site.languages')
-
-      # TODO refactor this class to Translations
-      @pages_document = site.spreadsheets.select { |s| s.title == 'TODO-translations' }.first
+      @pages_document = site.spreadsheets.select { |s| s.title == 'translations' }.first
     end
 
     def build(path)
       locales_path = "#{path}/locales"
       Dir.mkdir(locales_path) unless File.exists?(locales_path)
-
-      # each tab is a page
-      pages = {'pages' => {}}
 
       # init lang hash
       lang_keys = {}
@@ -22,9 +17,7 @@ module MiddleDrive
       end
 
       @pages_document.worksheets.each do |page|
-        puts "Building key value pairs for page named #{page.title}"
-        # in very first row we specify page's template
-        pages['pages'][page.title] = page[1, 1]
+        puts "Building key value pair translations for page named #{page.title}"
 
         @languages.each do |lang|
           lang_keys = load_language_values(lang_keys, page, lang)
@@ -36,8 +29,6 @@ module MiddleDrive
         output[lang] = lang_keys[lang]
         File.write("#{locales_path}/#{lang}.yml", output.to_yaml)
       end
-
-      File.write("#{path}/pages.yml", pages.to_yaml)
     end
 
     def load_language_values(hash, sheet, lang)
