@@ -22,3 +22,5 @@ build/source/images/*
 build/locales/*
 build/data/*
 build/pages.yml
+
+spec/fixtures/pages.yml

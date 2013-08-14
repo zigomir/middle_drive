@@ -37,13 +37,13 @@ module MiddleDrive
       d.build(@build_path, lang)
     end
 
-    MiddleDrive.build_page_yml
+    MiddleDrive.build_page_yml(@build_path)
   end
 
-  def self.build_page_yml
+  def self.build_page_yml(build_path)
     pages = {'pages' => {}}
 
-    Dir.foreach("#{@build_path}/data") do |item|
+    Dir.foreach("#{build_path}/data") do |item|
       next if item == '.' or item == '..' or not item.to_s.end_with?('.yml')
 
       page_name, lang = item.to_s.split('_')
@@ -52,12 +52,12 @@ module MiddleDrive
       pages['pages'][lang] = {} if pages['pages'][lang].nil?
 
       # first key in data files is template type
-      template_name = YAML.load(File.open("#{@build_path}/data/#{item}")).keys.first
+      template_name = YAML.load(File.open("#{build_path}/data/#{item}")).keys.first
       pages['pages'][lang][page_name] = template_name
     end
 
-    File.write("#{@build_path}/pages.yml", pages.to_yaml)
-    p "Dumping page structure to #{@build_path}/pages.yml file."
+    File.write("#{build_path}/pages.yml", pages.to_yaml)
+    p "Dumping page structure to #{build_path}/pages.yml file."
   end
 
   def self.update
