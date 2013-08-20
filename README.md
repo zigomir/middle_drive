@@ -74,9 +74,7 @@ sync all other data and clear up update flag. This is useful for circular checki
 fetched.
 
 ## TODO
-- modularize config.rb
 - tests!
-- [Partials](http://middlemanapp.com/templates/) for debug info
 - when building from scratch it would be better to start building `pages.yml`, `data.yml`, `en.yml` files locally
 and then run init to build structure on google drive
 - http://tvaughan.github.io/middleman-deploy/ + https://github.com/javan/whenever to run middle_drive update
