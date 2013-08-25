@@ -31,15 +31,17 @@ Then run
 - create google spreadsheet named `pages` inside this `site.collection`
   - each tab in this spreadsheet represents a page
   - value in first row and first column represents a template which will be used by middleman
-![Example](/img/spreadsheet.png)
-- create google spreadsheet named `data` inside `site.collection`
+![Example 1](img/spreadsheet.png)
+- create google spreadsheet named `data_:language` inside `site.collection`
   - each tab in this spreadsheet represents different list
-  - first data cell represents data type, which can be any of `array`, `hash` and `list`
-- to display image just use this Middleman helper
+  - first data cell represents template and data type (template:data_type). Supported data types are `array`, `hash` and `list`.
+![Example 2](img/spreadsheet-data.png)
 - use protected ranges to prevent customer changing the structure of pages: https://support.google.com/drive/answer/63175
 
 
 ## Quick helpers
+
+### Hash
 
 ```erb
 <section class="article">
@@ -49,7 +51,7 @@ Then run
 </section>
 ```
 
-- to display list type use this
+### List
 
 ```erb
 <% d(locals).each do |post| %>
