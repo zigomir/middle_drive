@@ -2,28 +2,38 @@
 
 ## Quick start
 
-    gem install middleman
-    middleman init new_site
+```bash
+gem install middleman
+middleman init new_site
+```
 
 To `Gemfile` in `new_site` add `middle_drive`
 
-    gem 'middle_drive'
+```
+gem 'middle_drive'
+```
 
 Then run
 
-    cd new_site
-    bundle
-    middle_drive init
+```bash
+cd new_site
+bundle
+middle_drive init
+```
 
 ## Manual install
 
-    gem install middle_drive
+```bash
+gem install middle_drive
+```
 
 ## Setup
 
 ### Middleman setup
 
-    middle_drive init
+```bash
+middle_drive init
+```
 
 ### Google drive setup conventions
 
@@ -63,13 +73,16 @@ Then run
 
 ## Usage
 
-    middle_drive
+```bash
+middle_drive
+```
 
 This command will sync images and page information from your Google Drive collection which was set in
 `middle_drive.yml` file.
 
-
-    middle_drive update
+```bash
+middle_drive update
+```
 
 Will search for update spreadsheet inside collection. If first A1 column will include `please update` value it will
 sync all other data and clear up update flag. This is useful for circular checking if there are new updates to be
